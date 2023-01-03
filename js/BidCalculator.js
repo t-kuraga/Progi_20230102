@@ -85,6 +85,8 @@ export class BidCalculator {
         iterations,
         precision,
         this._moneyPrecision,
+        // Given the problem, one could start with 0 as the lowest boundary, but it doesn't make any
+        // Sense to calculate over no bid. Hence the function starts with the smallest possible amount
         precision,
         this._budget
       );
@@ -92,7 +94,7 @@ export class BidCalculator {
       console.log(x);
       return this.calculateExpenses(x);
     } catch (error) {
-      console.error(`No solutions where found for Budget ${this.budget}`);
+      console.error(`No solutions where found for Budget ${this._budget}`);
       return {
         bid: 0,
         basicFee: 0,
@@ -145,8 +147,8 @@ function bisect(func, iterations, precision, xPrecision, a, b) {
     error_c = func(c);
 
     // Check if the above found point is root
-    if (c === a || c === b || error_c == 0 || Math.abs(error_c) <= precision)
-      break;
+    // (or a value with small enough positive error)
+    if (c === a || c === b || (error_c >= 0 && error_c <= precision)) break;
 
     // Decide the side to repeat the steps
     if (error_c * error_a < 0) {
