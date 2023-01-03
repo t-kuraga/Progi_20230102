@@ -1,5 +1,9 @@
 import { BidCalculator, getTotalSpent } from './js/BidCalculator.js';
-import testData from './data/tests.json';
+import initialTestData from './data/tests.json';
+
+// Load initial test data
+const testDataArea = document.getElementById('testdata');
+testDataArea.value = JSON.stringify(initialTestData);
 
 document.getElementById('calculateBtn').addEventListener('click', (e) => {
   // Get values from page
@@ -10,12 +14,13 @@ document.getElementById('calculateBtn').addEventListener('click', (e) => {
     document.getElementById('moneydecimals').value
   );
   const moneyPrecision = Math.pow(10, moneyDecimals);
+  const testData = JSON.parse(testDataArea.value);
 
   // Get the optimal expenses
   console.log(
     `Starting calculations with ${iterations} iterations and ${decimals} decimals of precision...`
   );
-  const results = getResults(iterations, precision, moneyPrecision);
+  const results = getResults(testData, iterations, precision, moneyPrecision);
   console.log(results);
 
   // Create a table and present the results
@@ -24,12 +29,13 @@ document.getElementById('calculateBtn').addEventListener('click', (e) => {
 
 /**
  * Calculate results for all test scenarios
+ * @param {Array} testData Target test data
  * @param {Number} iterations Max iterations to search
  * @param {Number} precision Decimal precision (1x10^n)
  * @param {Number} moneyPrecision Decimals for currency calculations (10^n)
  * @returns Array with optimal expenses per test case scenario
  */
-const getResults = (iterations, precision, moneyPrecision) => {
+const getResults = (testData, iterations, precision, moneyPrecision) => {
   const results = [];
   for (let i = 0; i < testData.length; i++)
     results.push(
