@@ -53,9 +53,8 @@ const getResults = (testData, iterations, precision, moneyPrecision) => {
  * @param {string} tableId Table id
  * @param {Array} testData Target test data
  * @param {Array} results Test results
- * @param {Number} moneyPrecision Decimals for currency calculations (10^n)
  */
-const createTable = (tableId, testData, results, moneyPrecision) => {
+const createTable = (tableId, testData, results) => {
   // Map all the data into a single data set
   const data = testData.map((t, i) => ({
     budget: t.budget,
@@ -69,7 +68,7 @@ const createTable = (tableId, testData, results, moneyPrecision) => {
     actualSpecialFee: results[i].specialFee,
     actualAssociationFee: results[i].associationFee,
     actualStorageFee: results[i].storageFee,
-    match: assertEqual(t.expected, results[i], moneyPrecision),
+    match: assertEqual(t.expected, results[i], 100),
     expectedSum: getTotalSpent(t.expected),
     actualSum: getTotalSpent(results[i]),
   }));
@@ -86,12 +85,24 @@ const createTable = (tableId, testData, results, moneyPrecision) => {
         title: 'Budget',
       },
       {
+        field: 'match',
+        title: 'Match (Result rounded to 2 decimals)',
+      },
+      {
         field: 'expectedBid',
         title: 'Expected Bid',
       },
       {
         field: 'actualBid',
         title: 'Actual Bid',
+      },
+      {
+        field: 'expectedSum',
+        title: 'Expected Total Spent',
+      },
+      {
+        field: 'actualSum',
+        title: 'Actual Total Spent',
       },
       {
         field: 'expectedBasicFee',
@@ -124,18 +135,6 @@ const createTable = (tableId, testData, results, moneyPrecision) => {
       {
         field: 'actualStorageFee',
         title: 'Actual Storage Fee',
-      },
-      {
-        field: 'match',
-        title: 'Match (Result rounded to 2 decimals)',
-      },
-      {
-        field: 'expectedSum',
-        title: 'Expected Total Spent',
-      },
-      {
-        field: 'actualSum',
-        title: 'Actual Total Spent',
       },
     ],
   });
