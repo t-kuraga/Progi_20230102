@@ -1,0 +1,72 @@
+[
+  {
+    "budget": 1000,
+    "expected": {
+      "bid": 823.53,
+      "basicFee": 50,
+      "specialFee": 16.47,
+      "associationFee": 10,
+      "storageFee": 100
+    }
+  },
+  {
+    "budget": 670,
+    "expected": {
+      "bid": 500,
+      "basicFee": 50,
+      "specialFee": 10,
+      "associationFee": 5,
+      "storageFee": 100
+    }
+  },
+  {
+    "budget": 670.1,
+    "expected": {
+      "bid": 500.01,
+      "basicFee": 50,
+      "specialFee": 10,
+      "associationFee": 10,
+      "storageFee": 100
+    }
+  },
+  {
+    "budget": 110,
+    "expected": {
+      "bid": 0,
+      "basicFee": 0,
+      "specialFee": 0,
+      "associationFee": 0,
+      "storageFee": 0
+    }
+  },
+  {
+    "budget": 111,
+    "expected": {
+      "bid": 0.98,
+      "basicFee": 10,
+      "specialFee": 0.02,
+      "associationFee": 0,
+      "storageFee": 100
+    }
+  },
+  {
+    "budget": 116.02,
+    "expected": {
+      "bid": 1,
+      "basicFee": 10,
+      "specialFee": 0.02,
+      "associationFee": 5,
+      "storageFee": 100
+    }
+  },
+  {
+    "budget": 1000000,
+    "expected": {
+      "bid": 980225.49,
+      "basicFee": 50,
+      "specialFee": 19604.51,
+      "associationFee": 20,
+      "storageFee": 100
+    }
+  }
+]
